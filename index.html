@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Search Query Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .query-preview {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen py-8 px-4">
+    <div class="max-w-2xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">🔍 Advanced Search Query Generator</h1>
+            <p class="text-gray-600">Find pain points and insights from Reddit, Facebook, and more</p>
+        </div>
+
+        <!-- Main Card -->
+        <div class="bg-white rounded-xl shadow-lg p-6 space-y-6">
+            <!-- Language Selection -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Language</label>
+                <select id="language" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                    <option value="en">English (Original)</option>
+                    <option value="th">Thai</option>
+                </select>
+            </div>
+
+            <!-- Platform Selection -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Platform</label>
+                <select id="platform" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+                    <option value="reddit.com">Reddit</option>
+                    <option value="facebook.com/groups">Facebook Groups</option>
+                    <option value="pantip.com">Pantip</option>
+                    <option value="twitter.com">Twitter/X</option>
+                    <option value="youtube.com">YouTube Comments</option>
+                    <option value="th.jobsdb.com">JobsDB</option>
+                    <option value="fastwork.co">Fastwork</option>
+                </select>
+            </div>
+
+            <!-- Main Topic -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Main Topic</label>
+                <input type="text" id="mainTopic" placeholder="e.g., Cowork, ลดความอ้วน, freelance"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+            </div>
+
+            <!-- Related Keywords -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Related Keywords
+                    <span class="text-gray-400 font-normal">(comma separated)</span>
+                </label>
+                <input type="text" id="relatedKeywords" placeholder="e.g., remote work, freelancer, digital nomad"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+            </div>
+
+            <!-- Exclude Keywords -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Exclude Keywords
+                    <span class="text-gray-400 font-normal">(comma separated, optional)</span>
+                </label>
+                <input type="text" id="excludeKeywords" placeholder="e.g., promotion, ads, spam"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition">
+            </div>
+
+            <!-- Intent Filters -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-3">Intent Filters</label>
+                <div class="grid grid-cols-2 gap-3">
+                    <label class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition">
+                        <input type="checkbox" id="painPoints" class="w-5 h-5 text-blue-600 rounded focus:ring-blue-500" checked>
+                        <span class="text-sm text-gray-700">Pain Points</span>
+                    </label>
+                    <label class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition">
+                        <input type="checkbox" id="experiences" class="w-5 h-5 text-blue-600 rounded focus:ring-blue-500" checked>
+                        <span class="text-sm text-gray-700">Experiences</span>
+                    </label>
+                    <label class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition">
+                        <input type="checkbox" id="questions" class="w-5 h-5 text-blue-600 rounded focus:ring-blue-500" checked>
+                        <span class="text-sm text-gray-700">Questions</span>
+                    </label>
+                    <label class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition">
+                        <input type="checkbox" id="recommendations" class="w-5 h-5 text-blue-600 rounded focus:ring-blue-500">
+                        <span class="text-sm text-gray-700">Recommendations</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Format Options -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-3">Format</label>
+                <div class="flex space-x-6">
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="radio" name="format" value="pipe" class="w-4 h-4 text-blue-600 focus:ring-blue-500" checked>
+                        <span class="text-sm text-gray-700">Use |</span>
+                    </label>
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="radio" name="format" value="or" class="w-4 h-4 text-blue-600 focus:ring-blue-500">
+                        <span class="text-sm text-gray-700">Use OR</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Query Preview -->
+            <div>
+                <div class="flex items-center justify-between mb-2">
+                    <label class="block text-sm font-medium text-gray-700">Generated Query</label>
+                    <span id="charCount" class="text-xs text-gray-500">0 chars</span>
+                </div>
+                <div class="bg-gray-900 rounded-lg p-4">
+                    <code id="queryPreview" class="query-preview text-green-400 text-sm block min-h-[3rem]">
+                        Enter a topic to generate query...
+                    </code>
+                </div>
+            </div>
+
+            <!-- Go Button -->
+            <button id="goButton" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition flex items-center justify-center space-x-2 disabled:bg-gray-400 disabled:cursor-not-allowed">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <span>Go Search on Google</span>
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-8 text-sm text-gray-500">
+            <p>Based on <a href="https://peerasak.com/post/how-to-find-business-ideas-from-reddit-and-facebook-using-ai/" target="_blank" class="text-blue-600 hover:underline">Gold Mining Framework</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Intent Pattern Library - Multi-language
+        const INTENT_PATTERNS = {
+            en: {
+                painPoints: [
+                    'struggle', 'problem', 'frustrated', 'difficult', 'hardships',
+                    'pain point', 'barriers', 'obstacles', 'concerns', 'worries',
+                    'what I regret', 'disappointed', 'annoying', 'stressful'
+                ],
+                experiences: [
+                    'I think', 'I feel', 'I was', 'I have been', 'I experienced',
+                    'my experience', 'in my opinion', 'IMO', 'my biggest struggle',
+                    'my biggest fear', 'I found that', 'I learned', 'I realized',
+                    'what I wish I knew'
+                ],
+                questions: [
+                    'how to', 'what is', 'help me', 'anyone know', 'question',
+                    'confused', 'not sure', 'wondering', 'trying to', 'looking for'
+                ],
+                recommendations: [
+                    'recommendation', 'advice', 'suggestion', 'what should',
+                    'recommend', 'suggest', 'tips', 'guide', 'best way'
+                ]
+            },
+            th: {
+                painPoints: [
+                    'ปัญหา', 'ยาก', 'ลำบาก', 'ท้อ', 'หมดหวัง', 'ผิดหวัง',
+                    'เสียใจ', 'เครียด', 'กังวล', 'กลัว', 'ไม่ไหว', 'เหนื่อย',
+                    'ทำไม่ได้', 'ติด', 'ล้มเหลว', 'พลาด', 'เสียดาย'
+                ],
+                experiences: [
+                    'ฉันคิดว่า', 'ผมคิดว่า', 'ฉันรู้สึก', 'ผมรู้สึก',
+                    'ประสบการณ์', 'เคย', 'พบว่า', 'รู้ว่า', 'เข้าใจว่า',
+                    'สิ่งที่อยากรู้', 'สิ่งที่เสียดาย', 'ความจริงที่ต้องเจอ'
+                ],
+                questions: [
+                    'อยากถาม', 'สงสัย', 'ไม่เข้าใจ', 'ช่วยหน่อย', 'ถามหน่อย',
+                    'แนะนำหน่อย', 'มีใครเคย', 'ยังไงดี', 'ทำไงดี',
+                    'พอจะรู้', 'ใครพอจะ', 'ขอคำแนะนำ'
+                ],
+                recommendations: [
+                    'แนะนำ', 'คำแนะนำ', 'ข้อแนะนำ', 'วิธี', 'เทคนิค',
+                    'เคล็ดลับ', 'ควร', 'อย่างไรดี', 'ดีที่สุด'
+                ]
+            }
+        };
+
+        // Platform-specific URL paths
+        const PLATFORM_PATHS = {
+            'reddit.com': { inurl: 'comments' },
+            'facebook.com/groups': {},
+            'pantip.com': { intext: 'กระทู้' },
+            'twitter.com': {},
+            'youtube.com': {},
+            'th.jobsdb.com': {},
+            'fastwork.co': {}
+        };
+
+        // DOM Elements
+        const elements = {
+            language: document.getElementById('language'),
+            platform: document.getElementById('platform'),
+            mainTopic: document.getElementById('mainTopic'),
+            relatedKeywords: document.getElementById('relatedKeywords'),
+            excludeKeywords: document.getElementById('excludeKeywords'),
+            painPoints: document.getElementById('painPoints'),
+            experiences: document.getElementById('experiences'),
+            questions: document.getElementById('questions'),
+            recommendations: document.getElementById('recommendations'),
+            queryPreview: document.getElementById('queryPreview'),
+            charCount: document.getElementById('charCount'),
+            goButton: document.getElementById('goButton')
+        };
+
+        // Get selected format
+        function getFormat() {
+            return document.querySelector('input[name="format"]:checked').value;
+        }
+
+        // Build query
+        function buildQuery() {
+            const mainTopic = elements.mainTopic.value.trim();
+            if (!mainTopic) {
+                return '';
+            }
+
+            const parts = [];
+            const platform = elements.platform.value;
+            const language = elements.language.value;
+            const format = getFormat();
+            const separator = format === 'pipe' ? '|' : 'OR';
+
+            // Site filter
+            parts.push(`site:${platform}`);
+
+            // URL path filter for Reddit
+            if (platform === 'reddit.com') {
+                parts.push(`(inurl:comments ${separator} inurl:thread)`);
+            }
+
+            // Topic keywords
+            const keywords = [mainTopic];
+            const related = elements.relatedKeywords.value
+                .split(',')
+                .map(k => k.trim())
+                .filter(k => k);
+            keywords.push(...related);
+
+            const keywordQuery = keywords.map(k => `intext:"${k}"`).join(` ${separator} `);
+            parts.push(`(${keywordQuery})`);
+
+            // Intent filters - use selected language
+            const patterns = INTENT_PATTERNS[language];
+            const selectedIntents = [];
+            if (elements.painPoints.checked) selectedIntents.push(...patterns.painPoints);
+            if (elements.experiences.checked) selectedIntents.push(...patterns.experiences);
+            if (elements.questions.checked) selectedIntents.push(...patterns.questions);
+            if (elements.recommendations.checked) selectedIntents.push(...patterns.recommendations);
+
+            if (selectedIntents.length > 0) {
+                const intentQuery = selectedIntents.map(i => `intext:"${i}"`).join(` ${separator} `);
+                parts.push(`(${intentQuery})`);
+            }
+
+            // Exclude keywords
+            const excludes = elements.excludeKeywords.value
+                .split(',')
+                .map(k => k.trim())
+                .filter(k => k);
+            excludes.forEach(e => parts.push(`-${e}`));
+
+            return parts.join(' ');
+        }
+
+        // Update preview
+        function updatePreview() {
+            const query = buildQuery();
+            if (query) {
+                elements.queryPreview.textContent = query;
+                elements.charCount.textContent = `${query.length} chars`;
+                elements.goButton.disabled = false;
+            } else {
+                elements.queryPreview.textContent = 'Enter a topic to generate query...';
+                elements.charCount.textContent = '0 chars';
+                elements.goButton.disabled = true;
+            }
+        }
+
+        // Go to Google Search
+        function goSearch() {
+            const query = buildQuery();
+            if (query) {
+                const encodedQuery = encodeURIComponent(query);
+                window.open(`https://www.google.com/search?q=${encodedQuery}`, '_blank');
+            }
+        }
+
+        // Event listeners
+        Object.values(elements).forEach(el => {
+            if (el && (el.tagName === 'INPUT' || el.tagName === 'SELECT')) {
+                el.addEventListener('input', updatePreview);
+                el.addEventListener('change', updatePreview);
+            }
+        });
+
+        // Radio buttons for format
+        document.querySelectorAll('input[name="format"]').forEach(radio => {
+            radio.addEventListener('change', updatePreview);
+        });
+
+        elements.goButton.addEventListener('click', goSearch);
+
+        // Initialize
+        updatePreview();
+    </script>
+</body>
+</html>
