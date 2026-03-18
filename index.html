@@ -146,6 +146,69 @@
                 </div>
             </div>
 
+            <!-- Time Range Selection -->
+            <div>
+                <label id="time-label" class="block text-sm font-medium text-stone-900 mb-3">When?</label>
+                <div class="flex flex-wrap gap-2">
+                    <button class="time-pill toggle-active h-9 px-4 rounded-full border flex items-center gap-1.5 text-sm font-normal transition" data-time="">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span id="label-anytime">Any time</span>
+                    </button>
+                    <button class="time-pill pill-inactive h-9 px-4 rounded-full border flex items-center gap-1.5 text-sm font-normal transition" data-time="h">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span id="label-hour">Past hour</span>
+                    </button>
+                    <button class="time-pill pill-inactive h-9 px-4 rounded-full border flex items-center gap-1.5 text-sm font-normal transition" data-time="d">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        <span id="label-day">Past 24h</span>
+                    </button>
+                    <button class="time-pill pill-inactive h-9 px-4 rounded-full border flex items-center gap-1.5 text-sm font-normal transition" data-time="w">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                        </svg>
+                        <span id="label-week">Past week</span>
+                    </button>
+                    <button class="time-pill pill-inactive h-9 px-4 rounded-full border flex items-center gap-1.5 text-sm font-normal transition" data-time="m">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        <span id="label-month">Past month</span>
+                    </button>
+                    <button class="time-pill pill-inactive h-9 px-4 rounded-full border flex items-center gap-1.5 text-sm font-normal transition" data-time="y">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span id="label-year">Past year</span>
+                    </button>
+                    <button class="time-pill pill-inactive h-9 px-4 rounded-full border flex items-center gap-1.5 text-sm font-normal transition" data-time="custom">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        <span id="label-custom">Custom</span>
+                    </button>
+                </div>
+
+                <!-- Custom Date Range -->
+                <div id="custom-date-section" class="hidden mt-4 p-4 bg-stone-50 rounded-xl border border-stone-200">
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <div class="flex-1">
+                            <label id="label-from" class="block text-xs font-medium text-stone-600 mb-1.5">From</label>
+                            <input type="date" id="date-from" class="w-full h-10 px-3 bg-white border border-stone-300 rounded-lg text-sm text-stone-700 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none">
+                        </div>
+                        <div class="flex-1">
+                            <label id="label-to" class="block text-xs font-medium text-stone-600 mb-1.5">To</label>
+                            <input type="date" id="date-to" class="w-full h-10 px-3 bg-white border border-stone-300 rounded-lg text-sm text-stone-700 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Intent Selection -->
             <div>
                 <label id="intent-label" class="block text-sm font-medium text-stone-900 mb-3">What to find?</label>
@@ -232,6 +295,16 @@
                 topicLabel: "What are you researching?",
                 topicPlaceholder: "e.g., Cowork, ลดความอ้วน, freelance...",
                 platformLabel: "Where to search?",
+                timeLabel: "When?",
+                labelAnytime: "Any time",
+                labelHour: "Past hour",
+                labelDay: "Past 24h",
+                labelWeek: "Past week",
+                labelMonth: "Past month",
+                labelYear: "Past year",
+                labelCustom: "Custom",
+                labelFrom: "From",
+                labelTo: "To",
                 intentLabel: "What to find?",
                 labelPain: "Pain Points",
                 labelQuestions: "Questions",
@@ -249,6 +322,16 @@
                 topicLabel: "คุณกำลังค้นหาอะไร?",
                 topicPlaceholder: "เช่น ลดความอ้วน, คาเฟ่, ฟรีแลนซ์...",
                 platformLabel: "ค้นหาจากที่ไหน?",
+                timeLabel: "เมื่อไหร่?",
+                labelAnytime: "ทุกช่วงเวลา",
+                labelHour: "ชั่วโมงที่แล้ว",
+                labelDay: "24 ชั่วโมงที่แล้ว",
+                labelWeek: "สัปดาห์ที่แล้ว",
+                labelMonth: "เดือนที่แล้ว",
+                labelYear: "ปีที่แล้ว",
+                labelCustom: "กำหนดเอง",
+                labelFrom: "ตั้งแต่",
+                labelTo: "ถึง",
                 intentLabel: "ต้องการหาอะไร?",
                 labelPain: "ปัญหา",
                 labelQuestions: "คำถาม",
@@ -311,6 +394,8 @@
         // State
         let currentLang = 'th';
         let selectedPlatform = 'reddit.com';
+        let selectedTimeRange = '';
+        let customDateRange = { from: '', to: '' };
         let selectedIntents = ['painPoints', 'questions'];
         let queryVisible = false;
 
@@ -324,6 +409,20 @@
             topicInput: document.getElementById('topic-input'),
             platformLabel: document.getElementById('platform-label'),
             platformPills: document.querySelectorAll('.platform-pill'),
+            timeLabel: document.getElementById('time-label'),
+            timePills: document.querySelectorAll('.time-pill'),
+            labelAnytime: document.getElementById('label-anytime'),
+            labelHour: document.getElementById('label-hour'),
+            labelDay: document.getElementById('label-day'),
+            labelWeek: document.getElementById('label-week'),
+            labelMonth: document.getElementById('label-month'),
+            labelYear: document.getElementById('label-year'),
+            labelCustom: document.getElementById('label-custom'),
+            customDateSection: document.getElementById('custom-date-section'),
+            labelFrom: document.getElementById('label-from'),
+            labelTo: document.getElementById('label-to'),
+            dateFrom: document.getElementById('date-from'),
+            dateTo: document.getElementById('date-to'),
             intentLabel: document.getElementById('intent-label'),
             intentToggles: document.querySelectorAll('.intent-toggle'),
             labelPain: document.getElementById('label-pain'),
@@ -365,6 +464,16 @@
             els.topicLabel.textContent = t.topicLabel;
             els.topicInput.placeholder = t.topicPlaceholder;
             els.platformLabel.textContent = t.platformLabel;
+            els.timeLabel.textContent = t.timeLabel;
+            els.labelAnytime.textContent = t.labelAnytime;
+            els.labelHour.textContent = t.labelHour;
+            els.labelDay.textContent = t.labelDay;
+            els.labelWeek.textContent = t.labelWeek;
+            els.labelMonth.textContent = t.labelMonth;
+            els.labelYear.textContent = t.labelYear;
+            els.labelCustom.textContent = t.labelCustom;
+            els.labelFrom.textContent = t.labelFrom;
+            els.labelTo.textContent = t.labelTo;
             els.intentLabel.textContent = t.intentLabel;
             els.labelPain.textContent = t.labelPain;
             els.labelQuestions.textContent = t.labelQuestions;
@@ -412,11 +521,35 @@
             return parts.join(' ');
         }
 
+        // Build search URL with time range
+        function buildSearchUrl() {
+            const query = buildQuery();
+            if (!query) return '';
+
+            const params = new URLSearchParams();
+            params.set('q', query);
+
+            // Add time range parameter if selected
+            if (selectedTimeRange === 'custom' && customDateRange.from && customDateRange.to) {
+                // Custom date range: cdr:1,cd_min:MM/DD/YYYY,cd_max:MM/DD/YYYY
+                const fromParts = customDateRange.from.split('-');
+                const toParts = customDateRange.to.split('-');
+                const cdMin = `${fromParts[1]}/${fromParts[2]}/${fromParts[0]}`;
+                const cdMax = `${toParts[1]}/${toParts[2]}/${toParts[0]}`;
+                params.set('tbs', `cdr:1,cd_min:${cdMin},cd_max:${cdMax}`);
+            } else if (selectedTimeRange) {
+                params.set('tbs', `qdr:${selectedTimeRange}`);
+            }
+
+            return `https://www.google.com/search?${params.toString()}`;
+        }
+
         // Update query display
         function updateQuery() {
             const query = buildQuery();
+            const url = buildSearchUrl();
             if (query) {
-                els.queryText.textContent = query;
+                els.queryText.textContent = url;
                 els.charCount.textContent = `${query.length} chars`;
                 els.searchBtn.disabled = false;
             } else {
@@ -475,6 +608,39 @@
             });
         });
 
+        // Time range pills
+        els.timePills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                els.timePills.forEach(p => {
+                    p.classList.remove('toggle-active');
+                    p.classList.add('pill-inactive');
+                });
+                pill.classList.remove('pill-inactive');
+                pill.classList.add('toggle-active');
+                selectedTimeRange = pill.dataset.time;
+
+                // Show/hide custom date section
+                if (selectedTimeRange === 'custom') {
+                    els.customDateSection.classList.remove('hidden');
+                } else {
+                    els.customDateSection.classList.add('hidden');
+                }
+
+                updateQuery();
+            });
+        });
+
+        // Custom date inputs
+        els.dateFrom.addEventListener('change', (e) => {
+            customDateRange.from = e.target.value;
+            updateQuery();
+        });
+
+        els.dateTo.addEventListener('change', (e) => {
+            customDateRange.to = e.target.value;
+            updateQuery();
+        });
+
         // Intent toggles
         els.intentToggles.forEach(toggle => {
             toggle.addEventListener('click', () => {
@@ -507,10 +673,9 @@
 
         // Search button
         els.searchBtn.addEventListener('click', () => {
-            const query = buildQuery();
-            if (query) {
-                const encodedQuery = encodeURIComponent(query);
-                window.open(`https://www.google.com/search?q=${encodedQuery}`, '_blank');
+            const url = buildSearchUrl();
+            if (url) {
+                window.open(url, '_blank');
             }
         });
 
